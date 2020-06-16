@@ -20,6 +20,7 @@ export default function SingleItem({ id }) {
   const { loading, error, data } = useQuery(SINGLE_ITEM_QUERY, {
     variables: { id },
   })
+  const { title, description, largeImage } = data ? data.item : {}
 
   if (loading) {
     return <p>Loading...</p>
@@ -55,12 +56,12 @@ export default function SingleItem({ id }) {
       `}
     >
       <Head>
-        <title>Sick Fits | {data.item.title}</title>
+        <title>Sick Fits | {title}</title>
       </Head>
-      <img src={data.item.largeImage} alt={data.item.title} />
+      <img src={largeImage} alt={title} />
       <div className='details'>
-        <h2>Viewing {data.item.title}</h2>
-        <p>{data.item.description}</p>
+        <h2>Viewing {title}</h2>
+        <p>{description}</p>
       </div>
     </div>
   )

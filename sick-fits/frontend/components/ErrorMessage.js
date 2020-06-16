@@ -1,9 +1,8 @@
-import styled from 'styled-components';
-import React from 'react';
+/** @jsx jsx */
+import { css, jsx } from '@emotion/core'
+import PropTypes from 'prop-types'
 
-import PropTypes from 'prop-types';
-
-const ErrorStyles = styled.div`
+const ErrorStyles = css`
   padding: 2rem;
   background: white;
   margin: 2rem 0;
@@ -16,36 +15,38 @@ const ErrorStyles = styled.div`
   strong {
     margin-right: 1rem;
   }
-`;
+`
 
-const DisplayError = ({ error }) => {
-  if (!error || !error.message) return null;
-  if (error.networkError && error.networkError.result && error.networkError.result.errors.length) {
+export default function DisplayError({ error }) {
+  if (!error || !error.message) return null
+  if (
+    error.networkError &&
+    error.networkError.result &&
+    error.networkError.result.errors.length
+  ) {
     return error.networkError.result.errors.map((error, i) => (
-      <ErrorStyles key={i}>
-        <p data-test="graphql-error">
+      <div key={i} css={ErrorStyles}>
+        <p data-test='graphql-error'>
           <strong>Shoot!</strong>
           {error.message.replace('GraphQL error: ', '')}
         </p>
-      </ErrorStyles>
-    ));
+      </div>
+    ))
   }
   return (
-    <ErrorStyles>
-      <p data-test="graphql-error">
+    <div css={ErrorStyles}>
+      <p data-test='graphql-error'>
         <strong>Shoot!</strong>
         {error.message.replace('GraphQL error: ', '')}
       </p>
-    </ErrorStyles>
-  );
-};
+    </div>
+  )
+}
 
 DisplayError.defaultProps = {
   error: {},
-};
+}
 
 DisplayError.propTypes = {
   error: PropTypes.object,
-};
-
-export default DisplayError;
+}
