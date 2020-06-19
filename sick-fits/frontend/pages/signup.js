@@ -2,6 +2,7 @@
 import { css, jsx } from '@emotion/core'
 import SignUp from '../components/SignUp'
 import SignIn from '../components/SignIn'
+import RequestReset from '../components/RequestReset'
 
 export default function SignupPage(props) {
   return (
@@ -14,6 +15,7 @@ export default function SignupPage(props) {
     >
       <SignUp />
       <SignIn />
+      <RequestReset />
     </div>
   )
 }

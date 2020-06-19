@@ -20,7 +20,7 @@ const INITIAL_STATE = {
   password: '',
 }
 
-export default function Signup(props) {
+export default function SignIn(props) {
   const [formData, setFormData] = React.useState(INITIAL_STATE)
   const [signIn, { error, loading, data }] = useMutation(SIGN_IN_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
