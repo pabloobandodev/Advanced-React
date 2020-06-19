@@ -5,13 +5,9 @@ import Form from './styles/Form'
 import Error from './ErrorMessage'
 import { CURRENT_USER_QUERY } from '../lib/queries'
 
-const SIGN_UP_MUTATION = gql`
-  mutation SIGN_UP_MUTATION(
-    $email: String!
-    $name: String!
-    $password: String!
-  ) {
-    signUp(email: $email, name: $name, password: $password) {
+const SIGN_IN_MUTATION = gql`
+  mutation SIGN_IN_MUTATION($email: String!, $password: String!) {
+    signIn(email: $email, password: $password) {
       id
       email
       name
@@ -20,14 +16,13 @@ const SIGN_UP_MUTATION = gql`
 `
 
 const INITIAL_STATE = {
-  name: '',
   email: '',
   password: '',
 }
 
-export default function SignUp(props) {
+export default function Signup(props) {
   const [formData, setFormData] = React.useState(INITIAL_STATE)
-  const [signUp, { error, loading, data }] = useMutation(SIGN_UP_MUTATION, {
+  const [signIn, { error, loading, data }] = useMutation(SIGN_IN_MUTATION, {
     refetchQueries: [{ query: CURRENT_USER_QUERY }],
   })
 
@@ -37,14 +32,14 @@ export default function SignUp(props) {
 
   const onSubmit = async (e) => {
     e.preventDefault()
-    await signUp({ variables: formData })
+    await signIn({ variables: formData })
     setFormData(INITIAL_STATE)
   }
 
   return (
     <Form onSubmit={onSubmit}>
       <fieldset disabled={loading} aria-busy={loading}>
-        <h2>Sign up for An Account</h2>
+        <h2>Sign into your account</h2>
         <Error error={error} />
         <label htmlFor='email'>
           Email
@@ -53,16 +48,6 @@ export default function SignUp(props) {
             name='email'
             placeholder='email'
             value={formData.email}
-            onChange={saveToFormData}
-          />
-        </label>
-        <label htmlFor='name'>
-          Name
-          <input
-            type='text'
-            name='name'
-            placeholder='name'
-            value={formData.name}
             onChange={saveToFormData}
           />
         </label>
@@ -76,7 +61,7 @@ export default function SignUp(props) {
             onChange={saveToFormData}
           />
         </label>
-        <button type='submit'>Sign Up!</button>
+        <button type='submit'>Sign In!</button>
       </fieldset>
     </Form>
   )

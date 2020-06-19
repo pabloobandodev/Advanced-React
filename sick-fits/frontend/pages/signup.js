@@ -1,6 +1,7 @@
 /** @jsx jsx */
 import { css, jsx } from '@emotion/core'
-import Signup from '../components/Signup'
+import SignUp from '../components/SignUp'
+import SignIn from '../components/SignIn'
 
 export default function SignupPage(props) {
   return (
@@ -11,9 +12,8 @@ export default function SignupPage(props) {
         grid-gap: 20px;
       `}
     >
-      <Signup />
-      <Signup />
-      <Signup />
+      <SignUp />
+      <SignIn />
     </div>
   )
 }
