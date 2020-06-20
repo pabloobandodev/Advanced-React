@@ -1,9 +1,10 @@
 import CreateItem from '../components/CreateItem'
+import PrivateRoute from '../components/PrivateRoute'
 
 export default function Sell(props) {
   return (
-    <div>
+    <PrivateRoute>
       <CreateItem />
-    </div>
+    </PrivateRoute>
   )
 }
