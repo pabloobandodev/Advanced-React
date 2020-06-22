@@ -26,9 +26,11 @@ export default function DeleteItem({ children, id }) {
   })
 
   const onClick = () => {
-    if (confirm('Are you sure you want to delete this item?')) {
-      deleteItem()
+    if (!confirm('Are you sure you want to delete this item?')) {
+      return
     }
+
+    deleteItem().catch((err) => alert(err.message))
   }
 
   return <button onClick={onClick}>{children}</button>
