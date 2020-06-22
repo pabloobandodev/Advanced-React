@@ -45,7 +45,7 @@ const updateItem = async (parent, args, ctx, info) => {
 
 const deleteItem = async (parent, args, ctx, info) => {
   const item = await ctx.db.query.item(
-    { id: args.id },
+    { where: { id: args.id } },
     `{
       id 
       title
@@ -64,7 +64,7 @@ const deleteItem = async (parent, args, ctx, info) => {
     throw new Error(`You don't have permission to do that!`)
   }
 
-  return ctx.db.mutation.deleteItem({ where }, info)
+  return ctx.db.mutation.deleteItem({ where: { id: args.id } }, info)
 }
 
 const signUp = async (parent, args, ctx, info) => {
