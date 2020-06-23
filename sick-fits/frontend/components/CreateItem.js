@@ -5,7 +5,7 @@ import Router from 'next/router'
 import Form from './styles/Form'
 import Error from './ErrorMessage'
 
-const CREATE_ITEM_MUTATION = gql`
+export const CREATE_ITEM_MUTATION = gql`
   mutation CREATE_ITEM_MUTATION(
     $title: String!
     $description: String!
@@ -135,5 +135,3 @@ export default function CreateItem() {
     </Form>
   )
 }
-
-export { CREATE_ITEM_MUTATION }

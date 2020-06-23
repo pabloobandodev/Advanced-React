@@ -18,7 +18,7 @@ const SINGLE_ITEM_QUERY = gql`
   }
 `
 
-const UPDATE_ITEM_MUTATION = gql`
+export const UPDATE_ITEM_MUTATION = gql`
   mutation UPDATE_ITEM_MUTATION(
     $id: ID!
     $title: String
@@ -124,5 +124,3 @@ export default function UpdateItem(props) {
     </Form>
   )
 }
-
-export { UPDATE_ITEM_MUTATION }

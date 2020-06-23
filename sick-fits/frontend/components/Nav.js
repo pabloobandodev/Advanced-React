@@ -1,11 +1,13 @@
 import Link from 'next/link'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery, useMutation } from '@apollo/react-hooks'
 import NavStyles from './styles/NavStyles'
-import { CURRENT_USER_QUERY } from '../lib/queries'
 import SignOut from './SignOut'
+import { CURRENT_USER_QUERY } from '../lib/queries'
+import { TOGGLE_CART_MUTATION } from '../components/Cart'
 
 export default function Nav() {
   const { data = { me: null }, loading, error } = useQuery(CURRENT_USER_QUERY)
+  const [toggleCart] = useMutation(TOGGLE_CART_MUTATION)
 
   const manageOptions = () => {
     if (!data.me) {
@@ -27,6 +29,7 @@ export default function Nav() {
         <Link href='/me'>
           <a>Account</a>
         </Link>
+        <button onClick={toggleCart}>My Cart</button>
         <SignOut />
       </>
     )

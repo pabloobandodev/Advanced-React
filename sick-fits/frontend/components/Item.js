@@ -40,7 +40,3 @@ export default function Item({ item }) {
     </ItemStyles>
   )
 }
-
-Item.propTypes = {
-  item: PropTypes.object.isRequired,
-}
