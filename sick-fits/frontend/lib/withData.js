@@ -17,16 +17,7 @@ function createClient({ headers }) {
     clientState: {
       resolvers: {
         Mutation: {
-          toggleCart(_, variables, { cache }) {
-            const { cartOpen } = cache.readQuery({
-              query: LOCAL_STATE_QUERY,
-            })
-            const data = {
-              data: { cartOpen: !cartOpen },
-            }
-            cache.writeData(data)
-            return data
-          },
+          toggleCart,
         },
       },
       defaults: {
@@ -34,6 +25,17 @@ function createClient({ headers }) {
       },
     },
   })
+}
+
+const toggleCart = (_, variables, { cache }) => {
+  const { cartOpen } = cache.readQuery({
+    query: LOCAL_STATE_QUERY,
+  })
+  const data = {
+    data: { cartOpen: !cartOpen },
+  }
+  cache.writeData(data)
+  return data
 }
 
 export default withApollo(createClient)

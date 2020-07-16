@@ -1,15 +1,14 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Link from 'next/link'
 import Title from './styles/Title'
 import ItemStyles from './styles/ItemStyles'
 import PriceTag from './styles/PriceTag'
 import formatMoney from '../lib/formatMoney'
-import DeleteItem from '../components/DeleteItem'
+import DeleteItem from './DeleteItem'
+import AddToCart from './AddToCart'
 
 export default function Item({ item }) {
   const { id, title, price, description, image } = item
-
   return (
     <ItemStyles>
       {image && <img src={image} alt={title} />}
@@ -34,7 +33,7 @@ export default function Item({ item }) {
         >
           <a>Edit ✏️</a>
         </Link>
-        <button>Add To Cart</button>
+        <AddToCart id={id} />
         <DeleteItem id={id}>Delete This Item</DeleteItem>
       </div>
     </ItemStyles>
